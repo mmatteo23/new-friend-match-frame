@@ -2,7 +2,6 @@
 import React from "react";
 import { Button } from "frames.js/next";
 import { frames } from "@/src/app/frames/frames";
-import { appURL } from "@/lib/utils";
 import { init, fetchQuery, fetchQueryWithPagination } from "@airstack/node";
 import {
   FetchUserFriendsBySocialCapitalScoreQuery,
@@ -14,7 +13,6 @@ import {
   fetchUserMutualFriendsQuery,
   fetchUserSocialCapitalScoreQuery,
 } from "../../lib/airstack/queries";
-import { Erica_One } from "next/font/google";
 import { FetchQuery } from "@airstack/node/dist/types/types";
 
 export interface QueryFetchUserSocialCapitalScoreResponse {
@@ -359,7 +357,7 @@ const handler = frames(async (ctx) => {
                     <div tw="flex flex-col text-center mr-[15px]">
                       <p tw="my-[2px] mx-auto">Mutuals</p>
                       <p tw="font-bold my-[2px] mx-auto text-[54px]">
-                        {mutuals[index] ? mutuals[index] : "0"}
+                        {mutuals[index] ? mutuals[index] : "-"}
                       </p>
                     </div>
                   </div>

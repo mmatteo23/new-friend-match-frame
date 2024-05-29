@@ -81,10 +81,10 @@ const handler = frames(async (ctx) => {
         <div tw="relative w-full h-full flex bg-[#6b38c2] text-white">
           <div tw="absolute top-0 left-0 w-full h-full flex flex-col justify-start p-[20px]">
             <div tw="flex flex-col text-white items-center p-[20px]">
-              <div tw="flex p-[40px] mt-[50px] w-auto text-white">
+              <div tw="flex p-[40px] mt-[60px] w-auto text-white">
                 <img
                   src={userSocialCapitalScore.profileImage || undefined}
-                  tw="w-[120px] h-[120px] rounded-full mr-[20px] object-cover"
+                  tw="w-[120px] h-[120px] rounded-full mr-[20px] object-cover my-auto"
                 />
                 <p
                   tw="font-bold text-[78px]"
@@ -93,17 +93,17 @@ const handler = frames(async (ctx) => {
                   {userSocialCapitalScore.profileName}
                 </p>
               </div>
-              <div tw="flex px-[20px] bg-white text-[#6b38c2] w-auto rounded-full px-[40px]">
+              <div tw="flex px-[20px] bg-white text-[#6b38c2] w-auto rounded-full px-[40px] mt-[86px]">
                 <p
                   tw="font-bold text-[48px]"
                   style={{ fontFamily: "Bricolage-Bold" }}
                 >
-                  your fc stats
+                  your social capital stats
                 </p>
               </div>
             </div>
 
-            <div tw="flex flex-row w-auto text-white items-center mb-[50px] items-start gap-[20px] justify-start">
+            <div tw="flex flex-row w-auto text-white items-center mb-[25px] mt-[30px] items-start justify-start">
               <div tw="flex flex-col mx-auto items-center">
                 <p tw="text-[48px] font-bold">Ranking 🏆</p>
                 <p tw="text-[64px]">
