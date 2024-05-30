@@ -2,62 +2,24 @@
 import React from "react";
 import { Button } from "frames.js/next";
 import { frames } from "@/src/app/frames/frames";
-import { init, fetchQuery } from "@airstack/node";
-import {
-  FetchUserFriendsBySocialCapitalScoreQuery,
-  FetchUserSocialCapitalScoreQuery,
-} from "../../lib/airstack/types";
-import { fetchUserSocialCapitalScoreQuery } from "../../lib/airstack/queries";
-
-export interface QueryFetchUserSocialCapitalScoreResponse {
-  data: FetchUserSocialCapitalScoreQuery | null;
-  error: {
-    message: string;
-  } | null;
-}
-
-export interface QueryFetchUserFriendsBySocialCapitalScoreResponse {
-  data: FetchUserFriendsBySocialCapitalScoreQuery | null;
-  error: {
-    message: string;
-  } | null;
-}
-
-async function getUserSocialCapitalScore(userName: string) {
-  const {
-    data: userSCS,
-    error: errorUserSCS,
-  }: QueryFetchUserSocialCapitalScoreResponse = await fetchQuery(
-    fetchUserSocialCapitalScoreQuery,
-    {
-      username: "fc_fname:" + userName,
-    }
-  );
-
-  if (errorUserSCS) {
-    throw new Error(errorUserSCS.message);
-  }
-
-  console.log("userSCS", JSON.stringify(userSCS?.Socials?.Social));
-
-  return userSCS?.Socials?.Social?.[0];
-}
+import { fetchUserSocialCapitalScore } from "@/lib/farcaster";
+import { appURL } from "@/lib/utils";
+import { v4 as uuidv4 } from "uuid";
 
 const handler = frames(async (ctx) => {
   try {
-    if (!process.env.AIRSTACK_API_KEY) {
-      throw new Error("Missing Airstack API key");
-    }
-    init(process.env.AIRSTACK_API_KEY);
-
     if (!ctx.message?.isValid) {
       throw new Error("Invalid message");
     }
 
     console.log("user data", ctx.message.requesterUserData);
-    const userName = ctx.message?.requesterUserData?.username || "";
+    const username = ctx.message?.requesterUserData?.username;
 
-    const userSocialCapitalScore = await getUserSocialCapitalScore(userName);
+    if (!username) {
+      throw new Error("Invalid username");
+    }
+
+    const userSocialCapitalScore = await fetchUserSocialCapitalScore(username);
     // const userSocialCapitalScore = {
     //   socialCapital: {
     //     socialCapitalScoreRaw: "4306806.000000000000075558",
@@ -124,8 +86,12 @@ const handler = frames(async (ctx) => {
         <Button action="post" key="1" target="/">
           Back
         </Button>,
-        <Button action="post" key="2" target="/reveal">
-          Reveal
+        <Button
+          action="post"
+          key="2"
+          target={`/loading?id=${uuidv4()}&requestTimestamp=${Date.now()}&status=start`}
+        >
+          Calculate Frens
         </Button>,
       ],
       imageOptions: {
@@ -137,19 +103,8 @@ const handler = frames(async (ctx) => {
     return {
       image: <span>Whooops an error occurred!</span>,
       buttons: [
-        <Button
-          action="link"
-          key="1"
-          target="https://passport.talentprotocol.com/signin"
-        >
-          Create Passport
-        </Button>,
-        <Button
-          action="link"
-          key="2"
-          target="https://www.notion.so/talentprotocol/Scholarships-EthCC-Take-Off-How-To-Apply-Guide-ec06928c69aa49699649256690d4b781?pvs=4"
-        >
-          Learn More
+        <Button action="post" key="1" target="/hero">
+          🔄 Try again
         </Button>,
       ],
       imageOptions: {
