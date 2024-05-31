@@ -3,7 +3,6 @@ import React from "react";
 import { Button } from "frames.js/next";
 import { frames } from "@/src/app/frames/frames";
 import { fetchUserSocialCapitalScore } from "@/lib/farcaster";
-import { appURL } from "@/lib/utils";
 import { v4 as uuidv4 } from "uuid";
 
 const handler = frames(async (ctx) => {
@@ -103,7 +102,7 @@ const handler = frames(async (ctx) => {
       },
     };
   } catch (error) {
-    console.error("Error in reveal frame", error);
+    console.error("Error in hero frame", error);
     return {
       image: <span>Whooops an error occurred!</span>,
       buttons: [

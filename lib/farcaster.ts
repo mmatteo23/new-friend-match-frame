@@ -81,7 +81,7 @@ export async function fetchUserSocialCapitalScore(username: string) {
   if (errorUserSCS) {
     throw new Error(errorUserSCS.message);
   }
-
+  console.log("userSCS", JSON.stringify(userSCS?.Socials?.Social));
   return userSCS?.Socials?.Social?.[0];
 }
 
