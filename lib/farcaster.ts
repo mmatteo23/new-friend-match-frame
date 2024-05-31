@@ -68,6 +68,7 @@ if (!process.env.AIRSTACK_API_KEY) {
 init(process.env.AIRSTACK_API_KEY);
 
 export async function fetchUserSocialCapitalScore(username: string) {
+  console.log("fetching user capital score for", username);
   const {
     data: userSCS,
     error: errorUserSCS,
@@ -77,11 +78,11 @@ export async function fetchUserSocialCapitalScore(username: string) {
       username: "fc_fname:" + username,
     }
   );
+  console.log("userSCS", JSON.stringify(userSCS), "errorUserSCS", errorUserSCS);
 
   if (errorUserSCS) {
     throw new Error(errorUserSCS.message);
   }
-  console.log("userSCS", JSON.stringify(userSCS?.Socials?.Social));
   return userSCS?.Socials?.Social?.[0];
 }
 
