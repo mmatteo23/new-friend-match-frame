@@ -60,20 +60,24 @@ const handler = frames(async (ctx) => {
                   tw="font-bold text-[48px]"
                   style={{ fontFamily: "Bricolage-Bold" }}
                 >
-                  your social capital stats
+                  Your Social Capital Stats
                 </p>
               </div>
             </div>
 
             <div tw="flex flex-row w-auto text-white items-center mb-[25px] mt-[30px] items-start justify-start">
               <div tw="flex flex-col mx-auto items-center">
-                <p tw="text-[48px] font-bold">Ranking 🏆</p>
+                <p tw="text-[48px]" style={{ fontFamily: "Inter-Bold" }}>
+                  Ranking 🏆
+                </p>
                 <p tw="text-[64px]">
                   {userSocialCapitalScore?.socialCapital?.socialCapitalRank}
                 </p>
               </div>
               <div tw="flex flex-col mx-auto items-center">
-                <p tw="text-[48px] font-bold">Score 🎯</p>
+                <p tw="text-[48px]" style={{ fontFamily: "Inter-Bold" }}>
+                  Score 🎯
+                </p>
                 <p tw="text-[64px]">
                   {userSocialCapitalScore?.socialCapital?.socialCapitalScore}
                 </p>
