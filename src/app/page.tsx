@@ -1,3 +1,4 @@
+import { appURL } from "@/lib/utils";
 import { fetchMetadata } from "frames.js/next";
 
 export async function generateMetadata() {
@@ -6,14 +7,7 @@ export async function generateMetadata() {
     description:
       "A frame for matching with new friends on Farcaster by @midenaeth",
     // provide a full URL to your /frames endpoint
-    other: await fetchMetadata(
-      new URL(
-        "/frames",
-        process.env.VERCEL_URL
-          ? `https://${process.env.VERCEL_URL}`
-          : "http://localhost:3000"
-      )
-    ),
+    other: await fetchMetadata(new URL("/frames", appURL())),
   };
 }
 
