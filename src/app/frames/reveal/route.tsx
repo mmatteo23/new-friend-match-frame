@@ -51,14 +51,11 @@ const handler = frames(async (ctx) => {
               <div tw="flex flex-col px-[40px] py-[20px] mt-[20px] w-auto text-white text-center">
                 <h1
                   tw="font-bold text-[68px] mx-auto"
-                  style={{ fontFamily: "Bricolage-Bold" }}
+                  style={{ fontFamily: "Inter-Bold" }}
                 >
                   Here we go {userName}!
                 </h1>
-                <p
-                  tw="font-bold text-[38px]"
-                  style={{ fontFamily: "Bricolage-Bold" }}
-                >
+                <p tw="text-[38px]">
                   These are some users in your social capital score range. Hope
                   you can make some new frens!
                 </p>
@@ -75,12 +72,13 @@ const handler = frames(async (ctx) => {
                     <div tw="flex">
                       <img
                         src={user?.profileImage ? user.profileImage : ""}
-                        tw="w-[120px] h-[120px] rounded-full mr-[20px] object-cover my-auto"
+                        tw="w-[120px] h-[120px] rounded-full mr-[20px] my-auto"
+                        style={{ objectFit: "cover" }}
                       />
                       <div tw="flex flex-col w-[700px]">
                         <p
-                          tw="font-bold text-[54px] my-[2px]"
-                          style={{ fontFamily: "Bricolage-Bold" }}
+                          tw="text-[54px] my-[2px]"
+                          style={{ fontFamily: "Inter-Bold" }}
                         >
                           {user?.profileHandle ? user.profileHandle : " "}
                         </p>
@@ -92,7 +90,12 @@ const handler = frames(async (ctx) => {
                       </div>
                     </div>
                     <div tw="flex flex-col text-center mr-[15px]">
-                      <p tw="my-[2px] mx-auto">Mutuals</p>
+                      <p
+                        tw="my-[2px] mx-auto"
+                        style={{ fontFamily: "Inter-Bold" }}
+                      >
+                        Mutuals
+                      </p>
                       <p tw="font-bold my-[2px] mx-auto text-[54px]">
                         {mutuals && mutuals[index] ? mutuals[index] : "-"}
                       </p>

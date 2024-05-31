@@ -114,7 +114,12 @@ const handleRequest = frames(async (ctx) => {
         <div tw="relative w-full h-full flex bg-[#6b38c2] text-white">
           <div tw="absolute top-0 left-0 w-full h-full flex flex-col justify-start p-[20px]">
             <div tw="flex flex-col p-[40px] mt-[200px] w-auto text-white">
-              <h1 tw="mx-auto text-center text-[98px]">Loading...</h1>
+              <h1
+                tw="mx-auto text-center text-[98px]"
+                style={{ fontFamily: "Inter-Bold" }}
+              >
+                Loading...
+              </h1>
               <p tw="text-center text-[42px] mx-auto">
                 (the frame is calculating your mutuals with your potential frens
                 👀)
