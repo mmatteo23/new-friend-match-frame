@@ -78,7 +78,6 @@ export async function fetchUserSocialCapitalScore(username: string) {
       username: "fc_fname:" + username,
     }
   );
-  console.log("userSCS", JSON.stringify(userSCS), "errorUserSCS", errorUserSCS);
 
   if (errorUserSCS) {
     throw new Error(errorUserSCS.message);
@@ -101,14 +100,10 @@ export async function getFrens(username: string) {
     throw new Error(errorUserSCS.message);
   }
 
-  console.log("userSCS", JSON.stringify(userSCS?.Socials?.Social));
-
   const rangeConstant = userSCS?.Socials?.Social?.[0].socialCapital
     ?.socialCapitalScore
     ? userSCS?.Socials?.Social?.[0].socialCapital?.socialCapitalScore * 0.21
     : 5;
-
-  console.log("rangeConstant", rangeConstant);
 
   const scs_gt =
     userSCS?.Socials?.Social?.[0].socialCapital?.socialCapitalScore! -
@@ -137,8 +132,6 @@ export async function getFrens(username: string) {
     throw new Error(errorFrens.message);
   }
 
-  console.log("already frens in your range:", frens?.Socials?.Social?.length);
-
   // extract from frens.Socials.Social all the object that have followers.Follower === null
   // this is the list of potential frens
   const potentialFrens = frens?.Socials?.Social?.filter((fren) => {
@@ -151,7 +144,6 @@ export async function getFrens(username: string) {
   const randomFrens = potentialFrens
     ?.sort(() => 0.5 - Math.random())
     .slice(0, 3);
-  // console.log("randomFrens", JSON.stringify(randomFrens));
 
   return {
     user: userSCS?.Socials?.Social?.[0],
@@ -224,16 +216,16 @@ export async function getMutualsFromFrens(
   try {
     if (frens) {
       for (let i = 0; i < frens.length; i++) {
-        console.log(
-          "mutuals between",
-          viewerIdentityOrAddress,
-          frens[i].identity || frens[i].custodyAddress
-        );
+        // console.log(
+        //   "mutuals between",
+        //   viewerIdentityOrAddress,
+        //   frens[i].identity || frens[i].custodyAddress
+        // );
         const mutual = await getMutuals(
           viewerIdentityOrAddress,
           frens[i].identity || frens[i].custodyAddress
         );
-        console.log("mutual calculated for " + frens[i].profileHandle, mutual);
+        // console.log("mutual calculated for " + frens[i].profileHandle, mutual);
         mutuals.push(mutual);
       }
       return mutuals;

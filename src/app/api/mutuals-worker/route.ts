@@ -8,11 +8,6 @@ async function handler(req: NextRequest) {
   // extract data params from the request
   const { username, id } = body;
 
-  console.log("Processing task...", {
-    username,
-    id,
-  });
-
   try {
     let storeResultInKv = await storeMutualObject(
       undefined,
@@ -34,7 +29,7 @@ async function handler(req: NextRequest) {
       fetchFrensResponse.user?.identity ||
         fetchFrensResponse.user?.custodyAddress
     );
-    console.log("MUTUAL FETCHED", fetchMutualsResponse);
+    // console.log("MUTUAL FETCHED", fetchMutualsResponse);
 
     if (!fetchMutualsResponse) {
       throw new Error("No mutuals found");
@@ -47,8 +42,6 @@ async function handler(req: NextRequest) {
       id,
       "success"
     );
-
-    console.log("Mutuals stored", storeResultInKv);
 
     return NextResponse.json({ name: "Mutuals response stored" });
   } catch (error: any) {

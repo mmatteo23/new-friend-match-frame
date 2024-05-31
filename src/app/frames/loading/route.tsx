@@ -13,7 +13,7 @@ const handleRequest = frames(async (ctx) => {
   const requestId = searchParams.get("id");
   const status = searchParams.get("status");
   if (status === "start") {
-    console.log("user data", ctx.message.requesterUserData);
+    // console.log("user data", ctx.message.requesterUserData);
     const username = ctx.message?.requesterUserData?.username || "";
 
     const res = await fetch(`${appURL()}/api/mutuals-task`, {
@@ -54,11 +54,11 @@ const handleRequest = frames(async (ctx) => {
     }
   }
 
-  console.log("console before mutual object");
+  // console.log("console before mutual object");
 
   const result = await getMutualObject(requestId!);
 
-  console.log("result", JSON.stringify(result));
+  // console.log("result", JSON.stringify(result));
 
   if (result?.status === "error") {
     const requestTimestamp = searchParams.get("requestTimestamp");
@@ -210,18 +210,22 @@ const handleRequest = frames(async (ctx) => {
                       src={user?.profileImage ? user.profileImage : ""}
                       tw="w-[120px] h-[120px] rounded-full mr-[20px] object-cover my-auto"
                     />
-                    <div tw="flex flex-col w-[700px]">
+                    <div tw="flex flex-col w-[650px]">
                       <p
                         tw="font-bold text-[54px] my-[2px]"
                         style={{ fontFamily: "Bricolage-Bold" }}
                       >
-                        {user?.profileHandle ? user.profileHandle : " "}
+                        {user?.profileHandle
+                          ? user.profileHandle
+                          : user.profileName
+                          ? user.profileName
+                          : "n.a"}
                       </p>
-                      <p tw="text-[32px] text-pretty ml-[2px] my-0">
+                      <p tw="text-[32px] text-wrap ml-[2px] my-0">
                         {user?.profileBio
                           ? user.profileBio.substring(0, 80) +
                             (user.profileBio.length > 80 ? "..." : "")
-                          : "bio not available"}
+                          : "-"}
                       </p>
                     </div>
                   </div>

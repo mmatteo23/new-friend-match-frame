@@ -11,7 +11,7 @@ const handler = frames(async (ctx) => {
       throw new Error("Invalid message");
     }
 
-    console.log("user data", ctx.message.requesterUserData);
+    // console.log("user data", ctx.message.requesterUserData);
     const userName = ctx.message?.requesterUserData?.username || "";
 
     const url = new URL(ctx.request.url);

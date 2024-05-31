@@ -3,7 +3,6 @@ import { Button } from "frames.js/next";
 import { frames } from "./frames";
 
 const handleRequest = frames(async (ctx) => {
-  console.log("ctx.message", ctx.message);
   return {
     image: (
       <div tw="relative w-full h-full flex bg-[#6b38c2] text-white">
